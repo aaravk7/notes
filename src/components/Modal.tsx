@@ -28,7 +28,7 @@ function Modal(props: ModalProps) {
           className="fixed inset-0 bg-black opacity-10"
           onClick={props.onClose}
         ></div>
-        <div className="relative z-10 bg-white p-8 rounded-lg shadow">
+        <div className="relative z-10 max-w-[95vw] bg-white p-8 rounded-lg shadow">
           <div className="absolute top-1 right-3 text-2xl font-medium">
             <button
               onClick={props.onClose}
@@ -37,7 +37,7 @@ function Modal(props: ModalProps) {
               &times;
             </button>
           </div>
-          <div className="min-w-[20rem] max-w-[90%]">
+          <div className="w-[18rem]">
             <h2 className="text-2xl font-bold mb-4">{props.title}</h2>
             {props.children}
           </div>

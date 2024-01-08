@@ -13,7 +13,7 @@ function Button({
   return (
     <button
       disabled={props.disabled || isLoading}
-      className={`py-[10px] px-8 whitespace-nowrap border border-indigo-500 rounded-md ${
+      className={`py-[10px] px-8 max-md:py-[6px] max-sm:px-3 whitespace-nowrap border border-indigo-500 rounded-md ${
         variant === "solid" ? "bg-indigo-500 text-white" : ""
       } ${
         props.disabled ? "" : "hover:bg-indigo-700 hover:text-white"

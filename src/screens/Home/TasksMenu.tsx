@@ -26,8 +26,8 @@ const TasksMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex justify-between py-8">
-      <div className="flex gap-4 items-center">
+    <div className="flex justify-between gap-4 py-8 flex-wrap">
+      <div className="flex gap-4 max-sm:gap-2 items-center">
         <Button onClick={() => setIsOpen(true)}>Add New Task</Button>
         <Input
           value={query}
@@ -35,7 +35,7 @@ const TasksMenu = () => {
           placeholder="Search Tasks"
         />
       </div>
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 max-sm:gap-2 items-center flex-wrap">
         <span>Filter</span>
         <FilterButton
           label={"All"}
