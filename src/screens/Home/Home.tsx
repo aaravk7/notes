@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+import toast, { LoaderIcon } from "react-hot-toast";
 import { Redirect } from "wouter";
 
 import { TasksProvider } from "../../contexts/TaskContext/TaskContext";
@@ -8,7 +8,7 @@ import TasksContainer from "./TasksContainer";
 import { User } from "./home.controller";
 
 function Home() {
-  const { data: user, error } = useFetch<User>("/auth");
+  const { data: user, error, status } = useFetch<User>("/auth");
 
   if (error) {
     toast.error(error.message ?? "Something went wrong");
@@ -17,6 +17,12 @@ function Home() {
       return <Redirect to="/login" />;
     }
   }
+  if (status === "loading" || !user)
+    return (
+      <div className="h-screen grid place-content-center">
+        <LoaderIcon className="h-16 w-16" />
+      </div>
+    );
   return (
     <TasksProvider>
       <Nav user={user} />
