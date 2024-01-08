@@ -41,6 +41,25 @@ export async function addTaskToDb(args: Omit<Task, "_id">) {
   return data;
 }
 
+export async function updateTaskInDb(_id: string, task: Partial<Task>) {
+  const response = await fetch(
+    import.meta.env.VITE_SERVER_URL + `/tasks/${_id}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(task),
+      headers: {
+        "content-type": "application/json",
+        "auth-token": localStorage.getItem("token") ?? "",
+      },
+    }
+  );
+  const data = await response.json();
+  if (response.status !== 200) {
+    throw new Error(data.error ?? "Something went wrong");
+  }
+  return data;
+}
+
 export async function removeTaskFromDb(_id: string) {
   const response = await fetch(
     import.meta.env.VITE_SERVER_URL + `/tasks/${_id}`,

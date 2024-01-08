@@ -5,6 +5,7 @@ import {
   addTaskToDb,
   fetchTasks,
   removeTaskFromDb,
+  updateTaskInDb,
 } from "../../screens/Home/home.controller";
 import { Task } from "./taskTypes";
 
@@ -14,7 +15,13 @@ interface TasksContextState {
   query: string;
   setQuery: (query: string) => void;
   setFilter: (filter: string) => void;
-  updateTask: (task: Task) => Promise<void>;
+  updateTask: ({
+    _id,
+    task,
+  }: {
+    _id: string;
+    task: Partial<Task>;
+  }) => Promise<Task>;
   removeTask: (taskId: string) => Promise<void>;
   addTask: (task: Omit<Task, "_id">) => Promise<Task>;
 }
@@ -51,10 +58,18 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     return data.task;
   };
 
-  const updateTask = async (task: Task) => {
+  const updateTask = async ({
+    _id,
+    task,
+  }: {
+    _id: string;
+    task: Partial<Task>;
+  }) => {
+    const data = await updateTaskInDb(_id, task);
     setTasks((prevTasks) =>
-      prevTasks.map((item) => (item._id === task._id ? task : item))
+      prevTasks.map((item) => (item._id === _id ? data.task : item))
     );
+    return data;
   };
 
   const removeTask = async (taskId: string) => {
