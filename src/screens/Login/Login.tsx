@@ -42,11 +42,13 @@ function Login() {
         <Input
           value={state.email}
           type="email"
+          required
           onChange={(email) => setState((prev) => ({ ...prev, email }))}
           placeholder="Email Address"
         />
         <Input
           value={state.password}
+          required
           onChange={(password) => setState((prev) => ({ ...prev, password }))}
           placeholder="Password"
           type="password"
